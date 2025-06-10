@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+</head>
+<body>
+<h1>Zaloguj się</h1>
+<form th:action="@{/login}" method="post">
+    <label>Użytkownik: <input type="text" name="username" /></label><br>
+    <label>Hasło: <input type="password" name="password" /></label><br>
+    <button type="submit">Zaloguj</button>
+
+    <div th:if="${param.error}" style="color:red">
+        Nieprawidłowa nazwa użytkownika lub hasło.
+    </div>
+</form>
+</body>
+</html>

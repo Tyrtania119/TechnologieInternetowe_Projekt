@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TODOer</title>
+</head>
+<body>
+<h1>Twoje taski</h1>
+<div>
+    <p>Procent ukończonych zadań :) : <span th:text="${completedPercent} + '%'" /></p>
+    <p>Zadania po terminie :< : <span th:text="${overduePercent} + '%'" /></p>
+</div>
+<a th:href="@{/add}">Dodaj task</a>
+<form method="get" action="/">
+    <select name="sort">
+        <option value="created">Data dodania</option>
+        <option value="priority">Priorytet</option>
+        <option value="title">Tytuł (A-Z)</option>
+        <option value="completed">Status</option>
+    </select>
+    <button type="submit">Sortuj</button>
+</form>
+<form method="get" action="/report">
+    <button type="submit">Generuj raport</button>
+</form>
+<ul>
+    <li th:each="task : ${tasks}">
+        <span th:text="${task.title}"></span>
+        <span th:text="${task.priority}"></span>
+        <span th:text="${task.deadline}"></span>
+        <span th:text="${task.completed} ? '✓' : '✗'"></span>
+        <a th:href="@{'/toggle/' + ${task.id}}">Zmień status</a>
+        <a th:href="@{'/edit/' + ${task.id}}">Edytuj</a>
+        <a th:href="@{'/delete/' + ${task.id}}">Usuń</a>
+    </li>
+</ul>
+</body>
+</html>

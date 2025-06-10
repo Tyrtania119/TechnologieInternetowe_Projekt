@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz zadania</title>
+</head>
+<body>
+<h1 th:text="${task.id == null} ? 'Dodaj zadanie' : 'Edytuj zadanie'"></h1>
+<form th:action="@{${task.id == null} ? '/add' : '/edit'}" th:object="${task}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Tytuł: <input type="text" th:field="*{title}" /></label>
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red"></div>
+
+    <label>Priorytet: <input type="number" th:field="*{priority}" /></label><br>
+    <label>Wykonane: <input type="checkbox" th:field="*{completed}" /></label><br>
+
+
+    <label>Termin (deadline): <input type="datetime-local" th:field="*{deadline}" /></label>
+    <div th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" style="color:red"></div>
+
+    <button type="submit">Zapisz</button>
+</form>
+</body>
+</html>
